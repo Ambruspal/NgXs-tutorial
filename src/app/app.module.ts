@@ -11,6 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
+import { NgxsModule } from '@ngxs/store';
+import { environment } from 'src/environments/environment';
+import { SimpleValueState } from './state/simple-value.state';
 
 @NgModule({
   declarations: [AppComponent, ChangeValueComponent, DisplayValueComponent],
@@ -23,6 +26,9 @@ import { MatDividerModule } from '@angular/material/divider';
     MatInputModule,
     FormsModule,
     MatDividerModule,
+    NgxsModule.forRoot([SimpleValueState], {
+      developmentMode: !environment.production,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
