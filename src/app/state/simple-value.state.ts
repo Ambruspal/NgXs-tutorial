@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Action, State, StateContext, StateToken } from '@ngxs/store';
+import { Action, Selector, State, StateContext, StateToken } from '@ngxs/store';
 import {
   DecrementValue,
   IncrementValue,
   ResetValue,
+  SetValue,
 } from './simple-value.actions';
 import { SimpleValueModel } from './simple-value.model';
 
@@ -48,5 +49,19 @@ export class SimpleValueState {
       ...state,
       value: 0,
     });
+  }
+
+  @Action(SetValue)
+  setValue(ctx: StateContext<SimpleValueModel>, action: SetValue) {
+    const state = ctx.getState();
+    ctx.setState({
+      ...state,
+      value: action.payload,
+    });
+  }
+
+  @Selector()
+  static getValue(state: SimpleValueModel) {
+    return state.value;
   }
 }
